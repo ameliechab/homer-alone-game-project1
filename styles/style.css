@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles:wght@400;700&family=Montserrat:wght@300;400;500;700&family=Noto+Sans:wght@300;600;700&display=swap");
+
+body {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  font-family: Fuzzy Bubbles;
+}
+
+h1 {
+  text-align: center;
+  font-size: 5em;
+}
+
+#guess-section {
+  background-color: burlywood;
+  height: 500px;
+  width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
+#darkside-section {
+  background-color: brown;
+  height: 300px;
+  width: 1500px;
+}
+
+#darkside-card {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
+}
+
+.card {
+  display: inline-block;
+  perspective: 300px;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+/*.card.turned {
+  pointer-events: none;
+} ====> to add when we turn the card */
+
+.card.turned .front {
+  transform: rotateY(0deg);
+}
+.card.turned .back {
+  transform: rotateY(180deg);
+}
+
+.card .back,
+.card .front {
+  width: 150px;
+  height: 233px;
+  margin: 10px;
+  padding: 20px;
+  font-size: 64px;
+  transition: transform 0.6s ease;
+}
+
+.card .back {
+  background-color: yellow;
+}
+
+.card .front {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: rotateY(-180deg) translateZ(1px);
+  backface-visibility: hidden;
+}
