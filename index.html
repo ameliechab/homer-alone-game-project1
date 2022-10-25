@@ -8,16 +8,52 @@
     <link rel="stylesheet" href="/styles/style.css" />
   </head>
   <body>
+    <dialog id="start-screen">
+      <img src="./images/homer-alone.gif" />
+      <p class="intro-paragraph">
+        Homer has lost his whole family, help him to find them!
+      </p>
+      <button class="button" id="start-button">START</button>
+    </dialog>
+
     <header>
       <h1>Homer Alone</h1>
       <hr />
-      <div id="guess-section">
-        <div id="card-to-guess"></div>
+      <div class="menu-buttons">
+        <button class="button" id="reset-button">Reset</button>
       </div>
-      <div id="darkside-section">
-        <div id="darkside-card"></div>
-      </div>
+      <hr />
     </header>
+    <dialog id="game-over-alert">
+      <h1>Game Over</h1>
+      <p>You have no more hp and you failed to find the whole family...</p>
+      <img src="./images/homer-game-over.gif" alt="Game Over" />
+      <hr />
+      <button class="button" id="try-again-button">Try again</button>
+    </dialog>
+    <dialog id="win-alert">
+      <h1>Nailed it!</h1>
+      <p>You find the whole family, Homer is happy well done!</p>
+      <img src="./images/hommer-winner.gif" alt="Win" />
+      <hr />
+      <button class="button" id="play-again-button">Play again</button>
+    </dialog>
+    <div>
+      <div class="heart-section">
+        <img class="heart" id="heart-1" src="./images/heart-simpson.png" />
+        <img class="heart" id="heart-2" src="./images/heart-simpson.png" />
+        <img class="heart" id="heart-3" src="./images/heart-simpson.png" />
+        <img class="heart" id="heart-4" src="./images/heart-simpson.png" />
+        <img class="heart" id="heart-5" src="./images/heart-simpson.png" />
+        <img class="heart" id="heart-6" src="./images/heart-simpson.png" />
+      </div>
+    </div>
+    <div id="guess-section">
+      <div id="card-to-guess" class="avoid-clicks"></div>
+    </div>
+    <div id="darkside-section">
+      <div id="darkside-card"></div>
+    </div>
 
     <script src="./src/index.js" type="module"></script>
   </body>

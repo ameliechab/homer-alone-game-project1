@@ -24,9 +24,6 @@ class Memory {
         Math.floor(Math.random() * this.cardsLeft.length),
         1
       );
-      if (randomCard.length === 0) {
-        console.log("Congrats, the game is finished!");
-      }
       return randomCard[i];
     }
   }

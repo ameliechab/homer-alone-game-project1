@@ -3,22 +3,62 @@
 body {
   display: flex;
   flex-direction: column;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   align-content: center;
   font-family: Fuzzy Bubbles;
+  background-image: url("/images/maison-simpson.png");
+  background-size: cover;
+}
+
+#start-screen {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  background-image: url("/images/donut2.gif");
+}
+
+.intro-paragraph {
+  color: black;
+  background-color: wheat;
+  padding: 2rem;
 }
 
 h1 {
   text-align: center;
-  font-size: 5em;
+  font-size: 3em;
+  font-weight: bold;
+}
+
+.heart {
+  height: 3rem;
+}
+
+.button {
+  width: 5rem;
+  height: 2rem;
+  font-family: Fuzzy Bubbles;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.menu-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  align-content: center;
 }
 
 #guess-section {
   background-color: burlywood;
-  height: 500px;
-  width: 500px;
+  height: 10%;
+  width: 20%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,8 +67,8 @@ h1 {
 
 #darkside-section {
   background-color: brown;
-  height: 300px;
-  width: 1500px;
+  height: 90%;
+  width: 100%;
 }
 
 #darkside-card {
@@ -47,9 +87,13 @@ h1 {
   position: relative;
 }
 
-/*.card.turned {
+.card.turned {
   pointer-events: none;
-} ====> to add when we turn the card */
+}
+
+.avoid-clicks {
+  pointer-events: none;
+}
 
 .card.turned .front {
   transform: rotateY(0deg);
@@ -60,8 +104,8 @@ h1 {
 
 .card .back,
 .card .front {
-  width: 150px;
-  height: 233px;
+  width: 170px;
+  height: 170px;
   margin: 10px;
   padding: 20px;
   font-size: 64px;
@@ -69,7 +113,7 @@ h1 {
 }
 
 .card .back {
-  background-color: yellow;
+  background-color: wheat;
 }
 
 .card .front {
