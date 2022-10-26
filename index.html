@@ -7,9 +7,19 @@
     <title>Homer Alone Game</title>
     <link rel="stylesheet" href="./../styles/style.css" />
   </head>
-  <body>
-    <dialog id="start-screen">
-      <!--<div style="background: url(./images/maison-simpson.png) no-repeat"></div>-->
+  <body
+    style="
+      background: url(./images/background-image.jpg);
+      background-size: cover;
+    "
+  >
+    <dialog
+      id="start-screen"
+      style="
+        background: url(./images/maison-simpson.png);
+        background-size: cover;
+      "
+    >
       <div class="start-screen-text">
         <p class="intro-paragraph">
           Homer has lost his whole family, help him to find them!
@@ -50,6 +60,9 @@
       <button class="button" id="play-again-button">Play again</button>
     </dialog>
     <section class="game-section">
+      <div
+        style="background: url(./images/background-image.jpg) no-repeat"
+      ></div>
       <div id="guess-section">
         <div id="card-to-guess" class="avoid-clicks"></div>
       </div>
