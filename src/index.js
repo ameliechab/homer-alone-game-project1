@@ -9,33 +9,48 @@ const cards = [
   { name: "Petit papa Noël", img: "chien-simpson.gif" },
 ];
 
-let memoryGame = new Memory(cards);
+// Initialization of the variable when we play several times the game
+let memoryGame = null;
+
+// Audio constants
 const dohSound = new Audio("/sounds/doh.wav");
 const woohooSound = new Audio("/sounds/woohoo.wav");
 const winSound = new Audio("/sounds/homer-laugh.wav");
 const gameOverSound = new Audio("/sounds/homer-scream.wav");
 
+// HP constant
 const heartSection = document.querySelector(".heart-section div");
 
-memoryGame.shuffleDarksideCards();
+// 1- Start screen
+document.getElementById("start-screen").showModal();
+document.getElementById("start-button").addEventListener("click", start);
 
-window.addEventListener("load", (event) => {
-  document.getElementById("start-screen").showModal();
-  document.getElementById("start-button").addEventListener("click", () => {
-    document.getElementById("start-screen").remove();
-  });
+// 2- The logic of the game
+function start() {
+  memoryGame = new Memory([...cards]); //To avoid the effect of splice when we re-start the game
 
+  // 3- To close the start screen
+  document.getElementById("start-screen").style.display = "none";
+  document.getElementById("start-screen").close();
+
+  // 4- Shuffle cards from the Memory method
+  memoryGame.shuffleDarksideCards();
+
+  //Display darkside cards
   let htmlCards = "";
+
   memoryGame.cards.forEach((pic) => {
     htmlCards += `
-        <div class= "card" data-card-name="${pic.name}">
-        <div class="back" name="${pic.img}">?</div>
-        <div class="front" style="background: url(/images/${pic.img}) no-repeat"></div>
-        </div>
-        `;
+          <div class= "card" data-card-name="${pic.name}">
+          <div class="back" name="${pic.img}">?</div>
+          <div class="front" style="background: url(/../images/${pic.img}) no-repeat"></div>
+          </div>
+          `;
   });
+
   document.querySelector("#darkside-card").innerHTML = htmlCards;
 
+  //Display card to guess
   let cardToGuess = memoryGame.getCardToGuess();
 
   function guessCard(card) {
@@ -43,24 +58,40 @@ window.addEventListener("load", (event) => {
       return;
     } else {
       let htmlGuessCard = `
-        <div class= "card turned" data-card-name="${card.name}">
-              <div class="back" name="${card.img}"></div>
-              <div class="front" style="background: url(/images/${card.img}) no-repeat"></div>
-              </div>
-              <p>Guess where is ${card.name}</p>`;
+          <div class= "card turned" data-card-name="${card.name}">
+                <div class="back" name="${card.img}"></div>
+                <div class="front" style="background: url(/../images/${card.img}) no-repeat"></div>
+                </div>
+                <p>Guess where is ${card.name}</p>`;
       document.querySelector("#card-to-guess").innerHTML = htmlGuessCard;
     }
   }
 
   guessCard(cardToGuess);
 
+  //Function to display hearts
+  function displayHearts() {
+    heartSection.innerHTML = null;
+    for (let i = memoryGame.hearts; i > 0; i--) {
+      const heart = new Image();
+      heart.src = "/../images/heart-simpson.png";
+      heart.id = `heart-${i}`;
+      heart.className = "heart";
+      heartSection.append(heart);
+    }
+  }
+  displayHearts();
+
+  //Check if pairs or not
   document.querySelectorAll(".card").forEach((card) => {
     card.addEventListener("click", () => {
       card.classList.add("turned");
+      //If cards match
       setTimeout(() => {
         if (cardToGuess.name === card.dataset.cardName) {
           woohooSound.play();
           const newGuess = memoryGame.getCardToGuess();
+          //A new card to guess appears until there is no more and you win
           if (!newGuess) {
             setTimeout(() => {
               winSound.play();
@@ -70,44 +101,44 @@ window.addEventListener("load", (event) => {
             guessCard(newGuess);
             cardToGuess.name = newGuess.name;
           }
+          //If cards don't match
         } else {
           dohSound.play();
           memoryGame.hearts--;
+
+          //Your cards turn again
           card.classList.remove("turned");
 
+          //You loose hearts
+          displayHearts();
+
+          //Until you game over
           if (memoryGame.hearts === 0) {
             setTimeout(() => {
               gameOverSound.play();
               document.getElementById("game-over-alert").showModal();
             }, 1000);
-
             return;
-          }
-
-          heartSection.innerHTML = null;
-          for (let i = memoryGame.hearts; i > 0; i--) {
-            const heart = new Image();
-            heart.src = "./images/heart-simpson.png";
-            heart.id = `heart-${i}`;
-            heart.className = "heart";
-            heartSection.append(heart);
           }
         }
       }, 1000);
-      console.log(`Card to guess: ${cardToGuess.name}`);
-      console.log(`Card clicked: ${card.dataset.cardName}`);
     });
   });
-});
+}
 
-document.getElementById("try-again-button").addEventListener("click", () => {
-  document.location.reload();
-});
-
-document.getElementById("play-again-button").addEventListener("click", () => {
-  document.location.reload();
-});
-
+//To reset the game
 document.getElementById("reset-button").addEventListener("click", () => {
-  document.location.reload();
+  start();
+});
+
+//To play the game again after the Game Over : re-start button
+document.getElementById("try-again-button").addEventListener("click", () => {
+  document.getElementById("game-over-alert").close();
+  start();
+});
+
+//To play the game again after the win alert : re-start button
+document.getElementById("play-again-button").addEventListener("click", () => {
+  document.getElementById("win-alert").close();
+  start();
 });

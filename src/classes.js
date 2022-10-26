@@ -16,6 +16,7 @@ class Memory {
       this.cards[m] = this.cards[i];
       this.cards[i] = t;
     }
+
     return t;
   }
 
@@ -28,10 +29,6 @@ class Memory {
       return randomCard[i];
     }
   }
-  //   restart() {
-  //     this.shuffleDarksideCards();
-  //     this.displayHeart();
-  //   }
 }
 
 export default Memory;
