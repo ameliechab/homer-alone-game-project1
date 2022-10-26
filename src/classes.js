@@ -2,6 +2,7 @@ class Memory {
   constructor(cards) {
     this.cards = cards;
     this.cardsLeft = cards;
+    this.hearts = 6;
   }
 
   shuffleDarksideCards() {
@@ -27,6 +28,10 @@ class Memory {
       return randomCard[i];
     }
   }
+  //   restart() {
+  //     this.shuffleDarksideCards();
+  //     this.displayHeart();
+  //   }
 }
 
 export default Memory;
