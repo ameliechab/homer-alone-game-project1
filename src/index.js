@@ -14,8 +14,8 @@ let memoryGame = null;
 
 // Audio constants
 const dohSound = new Audio("./sounds/doh.wav");
-const woohooSound = new Audio("./sounds/woohoo.wav");
-const winSound = new Audio("./sounds/homer-laugh.wav");
+const winSound = new Audio("./sounds/woohoo.wav");
+const laughSound = new Audio("./sounds/homer-laugh.wav");
 const gameOverSound = new Audio("./sounds/homer-scream.wav");
 
 // HP constant
@@ -103,7 +103,7 @@ function start() {
         //If cards match
         setTimeout(() => {
           if (cardToGuess.name === card.dataset.cardName) {
-            woohooSound.play();
+            laughSound.play();
             cardToGuess = memoryGame.getCardToGuess();
             //A new card to guess appears until there is no more and you win
             if (!cardToGuess) {
