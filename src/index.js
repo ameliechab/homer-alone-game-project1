@@ -21,22 +21,23 @@ const gameOverSound = new Audio("./sounds/homer-scream.wav");
 // HP constant
 const heartSection = document.querySelector(".heart-section div");
 
-// 1- Start screen
-document.getElementById("start-screen").showModal();
-document.getElementById("start-button").addEventListener("click", start);
+//Function to display cards to guess
+function guessCard(card) {
+  if (!card) {
+    return;
+  } else {
+    let htmlGuessCard = `
+          <div class= "card turned" data-card-name="${card.name}">
+                <div class="back" name="${card.img}"></div>
+                <div class="front" style="background: url(./images/${card.img}) no-repeat"></div>
+                </div>
+                <p>Guess where is ${card.name}</p>`;
+    document.querySelector("#card-to-guess").innerHTML = htmlGuessCard;
+  }
+}
 
-// 2- The logic of the game
-function start() {
-  memoryGame = new Memory([...cards]); //To avoid the effect of splice when we re-start the game
-
-  // 3- To close the start screen
-  document.getElementById("start-screen").style.display = "none";
-  document.getElementById("start-screen").close();
-
-  // 4- Shuffle cards from the Memory method
-  memoryGame.shuffleDarksideCards();
-
-  //Display darkside cards
+//Function to display darkside cards
+function darksideCards() {
   let htmlCards = "";
 
   memoryGame.cards.forEach((pic) => {
@@ -49,81 +50,93 @@ function start() {
   });
 
   document.querySelector("#darkside-card").innerHTML = htmlCards;
+}
+
+//Function to display hearts
+function displayHearts() {
+  heartSection.innerHTML = null;
+  for (let i = memoryGame.hearts; i > 0; i--) {
+    const heart = new Image();
+    heart.src = "./images/heart-simpson.png";
+    heart.id = `heart-${i}`;
+    heart.className = "heart";
+    heartSection.append(heart);
+  }
+}
+
+//Function to check if cards are the same or not
+
+// 1- Start screen
+document.getElementById("start-screen").showModal();
+document.getElementById("start-button").addEventListener("click", start);
+
+// 2- Function of a game
+function start() {
+  memoryGame = new Memory([...cards]); //To avoid the effect of splice when we re-start the game
+
+  // 3- To close the start screen
+  document.getElementById("start-screen").style.display = "none";
+  document.getElementById("start-screen").close();
+
+  // 4- Shuffle cards from the Memory method
+  memoryGame.shuffleDarksideCards();
+
+  //Display darkside cards
+  darksideCards();
 
   //Display card to guess
   let cardToGuess = memoryGame.getCardToGuess();
-
-  function guessCard(card) {
-    if (!card) {
-      return;
-    } else {
-      let htmlGuessCard = `
-          <div class= "card turned" data-card-name="${card.name}">
-                <div class="back" name="${card.img}"></div>
-                <div class="front" style="background: url(./images/${card.img}) no-repeat"></div>
-                </div>
-                <p>Guess where is ${card.name}</p>`;
-      document.querySelector("#card-to-guess").innerHTML = htmlGuessCard;
-    }
-  }
-
   guessCard(cardToGuess);
 
-  //Function to display hearts
-  function displayHearts() {
-    heartSection.innerHTML = null;
-    for (let i = memoryGame.hearts; i > 0; i--) {
-      const heart = new Image();
-      heart.src = "./images/heart-simpson.png";
-      heart.id = `heart-${i}`;
-      heart.className = "heart";
-      heartSection.append(heart);
-    }
-  }
+  //Display hearts
   displayHearts();
 
   //Check if pairs or not
-  document.querySelectorAll(".card").forEach((card) => {
-    card.addEventListener("click", () => {
-      card.classList.add("turned");
-      //If cards match
-      setTimeout(() => {
-        if (cardToGuess.name === card.dataset.cardName) {
-          woohooSound.play();
-          const newGuess = memoryGame.getCardToGuess();
-          //A new card to guess appears until there is no more and you win
-          if (!newGuess) {
-            setTimeout(() => {
-              winSound.play();
-              document.getElementById("win-alert").showModal();
-            }, 1000);
+
+  function checkIfPairs() {
+    document.querySelectorAll(".card").forEach((card) => {
+      card.addEventListener("click", () => {
+        card.classList.add("turned");
+        //If cards match
+        setTimeout(() => {
+          if (cardToGuess.name === card.dataset.cardName) {
+            woohooSound.play();
+            const newGuess = memoryGame.getCardToGuess();
+            //A new card to guess appears until there is no more and you win
+            if (!newGuess) {
+              setTimeout(() => {
+                winSound.play();
+                document.getElementById("win-alert").showModal();
+              }, 1000);
+            } else {
+              guessCard(newGuess);
+              cardToGuess.name = newGuess.name;
+            }
+            //If cards don't match
           } else {
-            guessCard(newGuess);
-            cardToGuess.name = newGuess.name;
+            dohSound.play();
+            memoryGame.hearts--;
+
+            //Your cards turn again
+            card.classList.remove("turned");
+
+            //You loose hearts
+            displayHearts();
+
+            //Until you game over
+            if (memoryGame.hearts === 0) {
+              setTimeout(() => {
+                gameOverSound.play();
+                document.getElementById("game-over-alert").showModal();
+              }, 1000);
+              return;
+            }
           }
-          //If cards don't match
-        } else {
-          dohSound.play();
-          memoryGame.hearts--;
-
-          //Your cards turn again
-          card.classList.remove("turned");
-
-          //You loose hearts
-          displayHearts();
-
-          //Until you game over
-          if (memoryGame.hearts === 0) {
-            setTimeout(() => {
-              gameOverSound.play();
-              document.getElementById("game-over-alert").showModal();
-            }, 1000);
-            return;
-          }
-        }
-      }, 1000);
+        }, 1000);
+      });
     });
-  });
+  }
+  checkIfPairs();
 }
 
 //To reset the game
