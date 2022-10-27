@@ -83,7 +83,6 @@ h1 {
   border-radius: 0.5em;
   background-color: #fed90f;
   color: black;
-  transition: all 0.5s ease-out;
   text-shadow: 3px 4px 3px #fed90f;
   -webkit-text-stroke: 1px;
   -webkit-text-stroke-color: black;
@@ -97,9 +96,8 @@ h1 {
 
 #start-button-text {
   animation-duration: 1.5s;
-  animation-name: clignote;
+  animation-name: blink;
   animation-iteration-count: infinite;
-  transition: all 0.5s ease-out;
 }
 
 #try-again-button,
@@ -166,12 +164,12 @@ h1 {
   -webkit-text-stroke: 1.5px;
   -webkit-text-stroke-color: #fed90f;
   animation-duration: 1.5s;
-  animation-name: clignote;
+  animation-name: blink;
   animation-iteration-count: infinite;
   transition: none;
 }
 
-@keyframes clignote {
+@keyframes blink {
   0% {
     opacity: 1;
   }
@@ -215,9 +213,11 @@ h1 {
 
 .card.turned .front {
   transform: rotateY(0deg);
+  transition: transform 0.6s ease;
 }
 .card.turned .back {
   transform: rotateY(180deg);
+  transition: transform 0.6s ease;
 }
 
 .card .back,
@@ -227,7 +227,6 @@ h1 {
   margin: 10px;
   padding: 20px;
   font-size: 64px;
-  transition: transform 0.6s ease;
   border-radius: 0.5rem;
   cursor: pointer;
 }
