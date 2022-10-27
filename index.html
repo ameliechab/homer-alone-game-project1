@@ -7,7 +7,12 @@
     <title>Homer Alone Game</title>
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
-  <body style="background: url(./images/background-image.jpg) no-repeat">
+  <body
+    style="
+      background: url(./images/background-image.jpg);
+      background-size: cover;
+    "
+  >
     <dialog
       id="start-screen"
       style="
@@ -17,7 +22,8 @@
     >
       <div class="start-screen-text">
         <p class="intro-paragraph">
-          Homer has lost his whole family, help him to find them!
+          Homer has lost his whole family,<br />
+          help him to find them!
         </p>
         <button class="button" id="start-button">START</button>
       </div>
@@ -25,7 +31,6 @@
 
     <header>
       <h1>Homer Alone</h1>
-      <hr />
       <div class="menu">
         <button class="button" id="reset-button">Reset</button>
         <div class="heart-section">
@@ -41,23 +46,22 @@
       </div>
     </header>
     <dialog class="dialog" id="game-over-alert">
-      <h1>Game Over</h1>
-      <p>You have no more hp and you failed to find the whole family...</p>
-      <img src="./images/homer-game-over.gif" alt="Game Over" />
-      <hr />
-      <button class="button" id="try-again-button">Try again</button>
+      <div id="dialog-game-over">
+        <h1>Game Over</h1>
+        <p>You have no more HP...</p>
+        <img src="./images/homer-game-over.gif" alt="Game Over" />
+        <button class="button" id="try-again-button">Try again</button>
+      </div>
     </dialog>
     <dialog class="dialog" id="win-alert">
-      <h1>Nailed it!</h1>
-      <p>You find the whole family, Homer is happy!</p>
-      <img src="./images/hommer-winner.gif" alt="Win" />
-      <hr />
-      <button class="button" id="play-again-button">Play again</button>
+      <div id="dialog-win">
+        <h1>Nailed it!</h1>
+        <p>You find the whole family, well done!</p>
+        <img src="./images/hommer-winner.gif" alt="Win" />
+        <button class="button" id="play-again-button">Play again</button>
+      </div>
     </dialog>
     <section class="game-section">
-      <div
-        style="background: url(./images/background-image.jpg) no-repeat"
-      ></div>
       <div id="guess-section">
         <div id="card-to-guess" class="avoid-clicks"></div>
       </div>

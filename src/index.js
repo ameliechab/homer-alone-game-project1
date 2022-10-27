@@ -64,7 +64,11 @@ function displayHearts() {
   }
 }
 
-//Function to check if cards are the same or not
+//Function to close the start screen
+function closeStartScreen() {
+  document.getElementById("start-screen").style.display = "none";
+  document.getElementById("start-screen").close();
+}
 
 // 1- Start screen
 document.getElementById("start-screen").showModal();
@@ -74,9 +78,8 @@ document.getElementById("start-button").addEventListener("click", start);
 function start() {
   memoryGame = new Memory([...cards]); //To avoid the effect of splice when we re-start the game
 
-  // 3- To close the start screen
-  document.getElementById("start-screen").style.display = "none";
-  document.getElementById("start-screen").close();
+  // 3- Close the start screen
+  closeStartScreen();
 
   // 4- Shuffle cards from the Memory method
   memoryGame.shuffleDarksideCards();
@@ -143,6 +146,11 @@ function start() {
 document.getElementById("reset-button").addEventListener("click", () => {
   start();
 });
+
+//To play on smartphone
+//document.getElementById("reset-button").addEventListener("touchstart", () => {
+//start();
+//});
 
 //To play the game again after the Game Over : re-start button
 document.getElementById("try-again-button").addEventListener("click", () => {
