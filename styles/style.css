@@ -46,6 +46,7 @@ body {
 
 h1 {
   text-align: center;
+  position: relative;
   font-size: 5em;
   font-weight: bold;
   color: #fed90f;
@@ -53,6 +54,12 @@ h1 {
   margin: 1rem;
   -webkit-text-stroke: 2px;
   -webkit-text-stroke-color: #fed90f;
+}
+
+#reset-button {
+  position: absolute;
+  right: 2rem;
+  top: 3rem;
 }
 
 .button {
@@ -79,8 +86,7 @@ h1 {
   justify-content: space-evenly;
   align-items: center;
   align-content: center;
-  background: rgba(255, 255, 255, 0.5);
-  width: 100vh;
+  margin: 1rem 0;
 }
 
 .game-section {
@@ -90,6 +96,12 @@ h1 {
   justify-content: center;
   align-items: center;
   align-content: center;
+}
+
+.heart-section {
+  position: absolute;
+  left: 2rem;
+  top: 3rem;
 }
 
 .heart-section {
@@ -113,6 +125,16 @@ h1 {
   align-items: center;
   justify-content: center;
   align-content: center;
+}
+
+.guess-text {
+  text-align: center;
+  font-size: 1.5rem;
+  color: #fed90f;
+  text-shadow: 1px 1px 4px black;
+  margin: 1rem;
+  -webkit-text-stroke: 1.5px;
+  -webkit-text-stroke-color: #fed90f;
 }
 
 #darkside-section {
@@ -162,12 +184,20 @@ h1 {
   transition: transform 0.6s ease;
   border-radius: 1rem;
   cursor: pointer;
-  box-shadow: 1px 1px 7px 0 black;
 }
 
 .card .back {
   background-image: linear-gradient(to top left, #fff4a6, #fed90f);
   background-size: cover;
+}
+
+#back-text {
+  text-align: center;
+  font-size: 5rem;
+  color: #fed90f;
+  text-shadow: 1px 1px 4px black;
+  -webkit-text-stroke: 1px;
+  -webkit-text-stroke-color: #fed90f;
 }
 
 .card .front {

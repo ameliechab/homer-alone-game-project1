@@ -21,6 +21,22 @@ const gameOverSound = new Audio("./sounds/homer-scream.wav");
 // HP constant
 const heartSection = document.querySelector(".heart-section div");
 
+//Function to display darkside cards
+function darksideCards() {
+  let htmlCards = "";
+
+  memoryGame.cards.forEach((pic) => {
+    htmlCards += `
+          <div class= "card" data-card-name="${pic.name}">
+          <div class="back" id="back-text" name="${pic.img}">?</div>
+          <div class="front" style="background: url(./images/${pic.img}) no-repeat"></div>
+          </div>
+          `;
+  });
+
+  document.querySelector("#darkside-card").innerHTML = htmlCards;
+}
+
 //Function to display cards to guess
 function guessCard(card) {
   if (!card) {
@@ -29,27 +45,11 @@ function guessCard(card) {
     let htmlGuessCard = `
           <div class= "card turned" data-card-name="${card.name}">
                 <div class="back" name="${card.img}"></div>
-                <div class="front" style="background: url(./images/${card.img}) no-repeat"></div>
+                <div class="front" style="background: url(./images/${card.img})"></div>
                 </div>
-                <p>Guess where is ${card.name}</p>`;
+                <p class="guess-text">Guess where is ${card.name}</p>`;
     document.querySelector("#card-to-guess").innerHTML = htmlGuessCard;
   }
-}
-
-//Function to display darkside cards
-function darksideCards() {
-  let htmlCards = "";
-
-  memoryGame.cards.forEach((pic) => {
-    htmlCards += `
-          <div class= "card" data-card-name="${pic.name}">
-          <div class="back" name="${pic.img}">?</div>
-          <div class="front" style="background: url(./images/${pic.img}) no-repeat"></div>
-          </div>
-          `;
-  });
-
-  document.querySelector("#darkside-card").innerHTML = htmlCards;
 }
 
 //Function to display hearts
@@ -104,16 +104,16 @@ function start() {
         setTimeout(() => {
           if (cardToGuess.name === card.dataset.cardName) {
             woohooSound.play();
-            const newGuess = memoryGame.getCardToGuess();
+            cardToGuess = memoryGame.getCardToGuess();
             //A new card to guess appears until there is no more and you win
-            if (!newGuess) {
+            if (!cardToGuess) {
               setTimeout(() => {
                 winSound.play();
                 document.getElementById("win-alert").showModal();
               }, 1000);
             } else {
-              guessCard(newGuess);
-              cardToGuess.name = newGuess.name;
+              guessCard(cardToGuess);
+              //cardToGuess.name = newGuess.name;
             }
             //If cards don't match
           } else {

@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Homer Alone Game</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍩</text></svg>"
+    />
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
   <body
@@ -30,9 +34,9 @@
     </dialog>
 
     <header>
+      <button class="button" id="reset-button">Reset</button>
       <h1>Homer Alone</h1>
       <div class="menu">
-        <button class="button" id="reset-button">Reset</button>
         <div class="heart-section">
           <div>
             <img class="heart" id="heart-1" src="./images/heart-simpson.png" />
@@ -48,7 +52,7 @@
     <dialog class="dialog" id="game-over-alert">
       <div id="dialog-game-over">
         <h1>Game Over</h1>
-        <p>You have no more HP...</p>
+        <p>You have no more donut HP...</p>
         <img src="./images/homer-game-over.gif" alt="Game Over" />
         <button class="button" id="try-again-button">Try again</button>
       </div>
