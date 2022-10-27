@@ -1,4 +1,4 @@
-import Memory from "./classes.js";
+import Memory from "./class.js";
 
 const cards = [
   { name: "Marge", img: "marge-simpson.gif" },
