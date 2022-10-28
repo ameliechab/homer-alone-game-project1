@@ -213,11 +213,9 @@ h1 {
 
 .card.turned .front {
   transform: rotateY(0deg);
-  transition: transform 0.6s ease;
 }
 .card.turned .back {
   transform: rotateY(180deg);
-  transition: transform 0.6s ease;
 }
 
 .card .back,
@@ -229,11 +227,13 @@ h1 {
   font-size: 64px;
   border-radius: 0.5rem;
   cursor: pointer;
+  transition: transform 0.6s ease;
 }
 
 .card .back {
   background-image: linear-gradient(to top left, #fff4a6, #fed90f);
   background-size: cover;
+  transition: transform 0.6s ease;
 }
 
 #back-text {
