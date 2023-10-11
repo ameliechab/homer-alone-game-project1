@@ -4,7 +4,7 @@
 
 The memory game is interesting because of the logic behind it. To challenge myself, I decided to create a new kind of memory : the game will give you a card and you will have to find the same card through a choice of several hidden cards. This way, you will have to guess all the cards but be careful: you have health points...
 
-# Key fetures
+# Key features
 
 - Randomize cards in an array with a shuffle method.
 - Display cards using the DOM.
